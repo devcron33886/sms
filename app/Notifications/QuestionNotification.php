@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Question;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,14 +12,19 @@ class QuestionNotification extends Notification
 {
     use Queueable;
 
+    protected $question;
+    protected $user;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Question $question)
     {
-        //
+        $this->question = $question;
+        $this->user = $question->user;
+
     }
 
     /**
@@ -41,8 +47,9 @@ class QuestionNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('New Question have been submitted')
+                    ->line('Hello' .$this->user->name . ',Has submitted new'.$this->question->title)
+                    ->action('Notification Action', url('/question/'.$this->question->id))
                     ->line('Thank you for using our application!');
     }
 
