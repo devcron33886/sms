@@ -9,8 +9,8 @@ class QuestionObserver
 {
     public function created(Question $question)
     {
-        User::with('mentor')->where('mentor_id', $question->mentor->id)->get()->each(function (User $user) use ($question) {
-            $user->notify(new QuestionNotification($question));
+        User::with('mentor')->where('mentor_id', $question->mentor->id)->get()->each(function (User $mentor) use ($question) {
+            $mentor->notify(new QuestionNotification($question));
         });
     }
 }
