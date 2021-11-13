@@ -1,107 +1,183 @@
 @extends('layouts.admin')
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    Dashboard
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ number_format($settings1['total_number']) }}</h3>
+
+                            <p>{{ $settings1['chart_title'] }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{{ route('admin.users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
                 </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ number_format($settings2['total_number']) }}</h3>
 
-                <div class="card-body">
-                    @if(session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            <p>{{ $settings2['chart_title'] }}</p>
                         </div>
-                    @endif
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('admin.testimonials.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ number_format($settings3['total_number']) }}</h3>
 
-                    <div class="row">
-                        <div class="{{ $settings1['column_class'] }}">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-red" style="display:flex; flex-direction: column; justify-content: center;">
-                                    <i class="fa fa-chart-line"></i>
-                                </span>
+                            <p>{{ $settings3['chart_title'] }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ number_format($settings4['total_number']) }}</h3>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ $settings1['chart_title'] }}</span>
-                                    <span class="info-box-number">{{ number_format($settings1['total_number']) }}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+                            <p>{{ $settings4['chart_title'] }}</p>
                         </div>
-                        <div class="{{ $settings2['column_class'] }}">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-red" style="display:flex; flex-direction: column; justify-content: center;">
-                                    <i class="fa fa-chart-line"></i>
-                                </span>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $unanswered_questions }}</h3>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ $settings2['chart_title'] }}</span>
-                                    <span class="info-box-number">{{ number_format($settings2['total_number']) }}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+                            <p>Pending Question</p>
                         </div>
-                        <div class="{{ $settings3['column_class'] }}">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-red" style="display:flex; flex-direction: column; justify-content: center;">
-                                    <i class="fa fa-chart-line"></i>
-                                </span>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $rejected }}</h3>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ $settings3['chart_title'] }}</span>
-                                    <span class="info-box-number">{{ number_format($settings3['total_number']) }}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+                            <p> Rejected Questions </p>
                         </div>
-                        <div class="{{ $settings4['column_class'] }}">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-red" style="display:flex; flex-direction: column; justify-content: center;">
-                                    <i class="fa fa-chart-line"></i>
-                                </span>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $answered }}</h3>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ $settings4['chart_title'] }}</span>
-                                    <span class="info-box-number">{{ number_format($settings4['total_number']) }}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+                            <p> Answered Questions</p>
                         </div>
-                        <div class="{{ $settings5['column_class'] }}">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-red" style="display:flex; flex-direction: column; justify-content: center;">
-                                    <i class="fa fa-chart-line"></i>
-                                </span>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ number_format($settings5['total_number']) }}</h3>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ $settings5['chart_title'] }}</span>
-                                    <span class="info-box-number">{{ number_format($settings5['total_number']) }}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+                            <p>{{ $settings5['chart_title'] }}</p>
                         </div>
-                        <div class="{{ $chart6->options['column_class'] }}">
-                            <h3>{!! $chart6->options['chart_title'] !!}</h3>
-                            {!! $chart6->renderHtml() !!}
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
                         </div>
-                        <div class="{{ $chart7->options['column_class'] }}">
-                            <h3>{!! $chart7->options['chart_title'] !!}</h3>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header"><h3>{!! $chart7->options['chart_title'] !!}</h3></div>
+                        <div class="card-body">
                             {!! $chart7->renderHtml() !!}
                         </div>
                     </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header"><h3>{!! $chart6->options['chart_title'] !!}</h3></div>
+                        <div class="card-body">
+                            {!! $chart6->renderHtml() !!}
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 @endsection
 @section('scripts')
-@parent
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>{!! $chart6->renderJs() !!}{!! $chart7->renderJs() !!}
+    @parent
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js">
+    </script>
+    {!! $chart6->renderJs() !!}
+    {!! $chart7->renderJs() !!}
 @endsection

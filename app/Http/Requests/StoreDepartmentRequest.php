@@ -9,12 +9,12 @@ use Illuminate\Http\Response;
 
 class StoreDepartmentRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return Gate::allows('department_create');
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => [
