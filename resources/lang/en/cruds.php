@@ -76,7 +76,7 @@ return [
         ],
     ],
     'category' => [
-        'title'          => 'Category of Questions',
+        'title'          => 'Category Management',
         'title_singular' => 'Category of Question',
         'fields'         => [
             'id'                => 'ID',
@@ -92,8 +92,8 @@ return [
         ],
     ],
     'question' => [
-        'title'          => 'Ask Question',
-        'title_singular' => 'Ask Question',
+        'title'          => 'Questions Management',
+        'title_singular' => 'Question',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => ' ',
@@ -138,7 +138,7 @@ return [
         ],
     ],
     'testimonial' => [
-        'title'          => 'Give Your Testimonial',
+        'title'          => 'Testimonial Management',
         'title_singular' => 'Give Your Testimonial',
         'fields'         => [
             'id'                => 'ID',
@@ -162,15 +162,15 @@ return [
         ],
     ],
     'student' => [
-        'title'          => 'Students',
+        'title'          => 'List Students',
         'title_singular' => 'Student',
     ],
     'mentor' => [
-        'title'          => 'Mentors',
+        'title'          => 'List Mentors',
         'title_singular' => 'Mentor',
     ],
     'department' => [
-        'title'          => 'Department',
+        'title'          => 'Department Management',
         'title_singular' => 'Department',
         'fields'         => [
             'id'                => 'ID',
