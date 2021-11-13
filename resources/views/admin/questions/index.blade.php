@@ -26,7 +26,7 @@
                             {{ trans('cruds.question.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.question.fields.mentor') }}
+                            Mentor
                         </th>
                         <th>
                             {{ trans('cruds.question.fields.category') }}

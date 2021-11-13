@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.question.fields.mentor') }}
+                            Mentor
                         </th>
                         <td>
                             {{ $question->mentor->name ?? '' }}

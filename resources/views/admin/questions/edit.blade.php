@@ -11,7 +11,7 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="mentor_id">{{ trans('cruds.question.fields.mentor') }}</label>
+                <label class="required" for="mentor_id">Choose Mentor</label>
                 <select class="form-control select2 {{ $errors->has('mentor') ? 'is-invalid' : '' }}" name="mentor_id" id="mentor_id" required>
                     @foreach($mentors as $id => $entry)
                         <option value="{{ $id }}" {{ (old('mentor_id') ? old('mentor_id') : $question->mentor->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
