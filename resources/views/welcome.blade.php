@@ -1,7 +1,10 @@
 @extends('layouts.front')
 @section('content')
     <div class="container col-md-11 mt-5">
-        <div class="row justify-content-center">
+        <div class="row">
+            <h2 class="text">Students testimonials after taking Mentorship Program</h2>
+        </div>
+        <div class="row">
             @foreach ($testimonials as $testimonial)
                 <div class="col-md-4">
                     <div class="card card-widget widget-user-2">
