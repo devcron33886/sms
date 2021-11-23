@@ -4,25 +4,34 @@
         <div class="row justify-content-center">
             <h2 class="h2">Students Testimonials</h2>
         </div>
-        <div class="row pt-5">
-            @foreach ($testimonials as $testimonial)
-                <div class="col-md-4">
-                    <div class="card card-widget widget-user-2">
-                        <div class="widget-user-header bg-info-gradient">
-                            <p class="text-black-50">
-                                {{ $testimonial->message }}
-                            </p>
 
-                        </div>
-                        <div class="card-footer p-0">
-                            <h3 class="widget-user-username">{{ $testimonial->user->name }}</h3>
-                            <h5 class="widget-user-desc">
+        @foreach ($testimonials as $testimonial)
+                    <div class="col-md-6">
+                        <div class="card card-widget widget-user-2">
+                            <div class="widget-user-header">
+                                <div class="widget-user-image">
+                                    @if($testimonial->user->profile_picture)
+                                        <img class="img-circle elevation-2"
+                                             src="{{ $testimonial->user->profile_picture->getUrl('preview') }}" alt="User Avatar">
+                                    @endif
+                                </div>
 
-                            </h5>
+                                <h3 class="widget-user-username">{{ $testimonial->user->name }}</h3>
+                                <h5 class="widget-user-desc">@foreach($testimonial->user->roles as $key => $roles)
+                                        {{ $roles->title }}</h5>@endforeach
+                            </div>
+                            <div class="card-footer p-0">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <p class="text-sm">{{ $testimonial->message }}</p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+      
+        
+        
     </div>
 @endsection

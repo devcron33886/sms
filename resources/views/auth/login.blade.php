@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="login-box">
+<div class="login-box" style="width: 30em !important;">
     
     <div class="card card-outline card-primary">
         <div class="card-header text-center">

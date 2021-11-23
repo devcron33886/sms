@@ -62,19 +62,7 @@
                     </div>
                     <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('global.login_password_confirmation') }}">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fas fa-mobile"></span>
-                        </div>
-                    </div>
-                    <input type="text" name="mobile" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" placeholder="Enter mobile number">
-                    @if($errors->has('mobile'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('mobile') }}
-                        </div>
-                    @endif
-                </div>
+                
 
                 <div class="row">
                     <div class="col-12 text-right">

@@ -14,6 +14,14 @@
     <link href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
     @yield('styles')
+    <style type="text/css">
+        body {
+            background-image: url("{{ asset('images/background.jpg') }}") !important;
+            position: center !important;
+            margin-right: 4em !important;
+            
+        }
+    </style>
 </head>
 
 <body class="header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden login-page">

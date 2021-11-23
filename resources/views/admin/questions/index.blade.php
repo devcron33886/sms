@@ -61,7 +61,14 @@
                                 {{ $question->title ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Question::STATUS_SELECT[$question->status] ?? '' }}
+                                @if($question->status == 0 ?? '')
+                                    <span class="badge badge-warning">Pending</span>
+                                @elseif($question->status == 1)
+                                    <span class="badge badge-success">Answered</span>
+                                @elseif($question->status == 2)
+                                    <span class="badge badge-danger">Rejected</span>
+                                @endif
+                                
                             </td>
                             <td>
                                 @can('question_show')
