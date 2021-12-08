@@ -22,6 +22,7 @@ class Department extends Model
 
     protected $fillable = [
         'name',
+        'short_name',
         'created_at',
         'updated_at',
         'deleted_at',

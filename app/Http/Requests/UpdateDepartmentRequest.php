@@ -22,6 +22,11 @@ class UpdateDepartmentRequest extends FormRequest
                 'required',
                 'unique:departments,name,' . request()->route('department')->id,
             ],
+            'short_name' => [
+                'string',
+                'required',
+                'unique:departments,short_name,' . request()->route('department')->id,
+            ],
         ];
     }
 }

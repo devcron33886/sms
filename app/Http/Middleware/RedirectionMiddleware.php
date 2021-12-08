@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,14 +17,13 @@ class RedirectionMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = \Auth::user();
-        if ($user->roles() == ['Student']){
-            return redirect()->route('admin.overviews.index');
-
-        }
-        elseif ($user->roles() == ['Admin'])
+        if (auth()->user()->access_level == 1)
         {
             return redirect()->route('admin.home');
+        }
+        elseif (auth()->user()->access_level == 5)
+        {
+            return redirect()->route('admin.overviews.index');
         }
         return $next($request);
     }

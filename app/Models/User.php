@@ -2,21 +2,23 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
-use Carbon\Carbon;
+use DateTimeInterface;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+/**
+ * @method static insert(array[] $users)
+ */
 class User extends Authenticatable implements HasMedia
 {
     use SoftDeletes;
@@ -56,6 +58,19 @@ class User extends Authenticatable implements HasMedia
         'updated_at',
         'deleted_at',
     ];
+    /**
+     * @var mixed
+     */
+    private $profile_picture;
+    /**
+     * @var mixed
+     */
+    private $email;
+
+    /**
+     * @var mixed
+     */
+
 
     public function __construct(array $attributes = [])
     {
@@ -68,11 +83,6 @@ class User extends Authenticatable implements HasMedia
         });
     }
 
-    public function getIsAdminAttribute(): bool
-    {
-        return $this->roles()->where('id', 1)->exists();
-    }
-
     /**
      * @throws InvalidManipulation
      */
@@ -80,16 +90,6 @@ class User extends Authenticatable implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
-    }
-
-    public function getEmailVerifiedAtAttribute($value): ?string
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
-    }
-
-    public function setEmailVerifiedAtAttribute($value)
-    {
-        $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
     public function setPasswordAttribute($input)
@@ -104,7 +104,7 @@ class User extends Authenticatable implements HasMedia
         $this->notify(new ResetPassword($token));
     }
 
-    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
     }
@@ -121,7 +121,7 @@ class User extends Authenticatable implements HasMedia
         return $file;
     }
 
-    public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'department_id');
     }

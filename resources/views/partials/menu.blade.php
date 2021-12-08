@@ -22,15 +22,17 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("admin.home") }}">
-                        <i class="fas fa-fw fa-tachometer-alt nav-icon">
-                        </i>
-                        <p>
-                            {{ trans('global.dashboard') }}
-                        </p>
-                    </a>
-                </li>
+                @can('dashboard_access')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route("admin.home") }}">
+                            <i class="fas fa-fw fa-tachometer-alt nav-icon">
+                            </i>
+                            <p>
+                                {{ trans('global.dashboard') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @can('category_access')
                     <li class="nav-item">
                         <a href="{{ route("admin.categories.index") }}"

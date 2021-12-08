@@ -22,6 +22,11 @@ class StoreDepartmentRequest extends FormRequest
                 'required',
                 'unique:departments',
             ],
+            'short_name' => [
+                'string',
+                'required',
+                'unique:departments',
+            ],
         ];
     }
 }

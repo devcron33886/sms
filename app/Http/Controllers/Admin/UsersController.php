@@ -10,8 +10,11 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
+use App\Notifications\RegistrationNotification;
 use Gate;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -50,6 +53,7 @@ class UsersController extends Controller
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $user->id]);
         }
+        $user->notify(new RegistrationNotification());
 
         return redirect()->route('admin.users.index');
     }
@@ -67,7 +71,7 @@ class UsersController extends Controller
         return view('admin.users.edit', compact('roles', 'departments', 'user'));
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): \Illuminate\Http\RedirectResponse
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
@@ -110,14 +114,18 @@ class UsersController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function storeCKEditorImages(Request $request)
+    /**
+     * @throws FileIsTooBig
+     * @throws FileDoesNotExist
+     */
+    public function storeCKEditorImages(Request $request): \Illuminate\Http\JsonResponse
     {
         abort_if(Gate::denies('user_create') && Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new User();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new User();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

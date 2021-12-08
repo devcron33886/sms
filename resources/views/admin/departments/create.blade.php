@@ -18,6 +18,14 @@
                 <span class="help-block">{{ trans('cruds.department.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="short_name">Department Short Code</label>
+                <input class="form-control {{ $errors->has('short_name') ? 'is-invalid' : '' }}" type="text" name="short_name" id="short_name" value="{{ old('short_name', '') }}" >
+                @if($errors->has('short_name'))
+                    <span class="text-danger">{{ $errors->first('short_name') }}</span>
+                @endif
+                
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

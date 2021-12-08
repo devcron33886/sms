@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
 <div class="login-box" style="width: 30em !important;">
-    
+
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            
+
             <a href="{{ route('admin.home') }}" class="h1">
                 {{ trans('panel.site_title') }}
             </a>
-            
+
         </div>
         <div class="card-body">
             <p class="login-box-msg">
@@ -81,9 +81,11 @@
                 </p>
             @endif
             <p class="mb-1">
-                <a class="text-center" href="{{ route('register') }}">
-                    {{ trans('global.register') }}
-                </a>
+                @if(Route::has('register'))
+                    <a class="text-center" href="{{ route('register') }}">
+                        {{ trans('global.register') }}
+                    </a>
+                @endif
             </p>
         </div>
         <!-- /.login-card-body -->

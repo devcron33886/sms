@@ -31,6 +31,14 @@
                             {{ $department->name }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                           Department Short Name
+                        </th>
+                        <td>
+                            {{ $department->short_name }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
