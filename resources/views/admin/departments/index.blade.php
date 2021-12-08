@@ -46,6 +46,9 @@
                                 {{ $department->name ?? '' }}
                             </td>
                             <td>
+                                {{ $department->short_name ?? '' }}
+                            </td>
+                            <td>
                                 @can('department_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.departments.show', $department->id) }}">
                                         {{ trans('global.view') }}
