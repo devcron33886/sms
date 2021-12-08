@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuestionNotificationStatus extends Notification
+class CredentialsNotification extends Notification
 {
     use Queueable;
 
@@ -18,7 +18,7 @@ class QuestionNotificationStatus extends Notification
      */
     public function __construct()
     {
-        
+        //
     }
 
     /**

@@ -54,6 +54,7 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
         'department_id',
         'class',
+        'reg_number',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -124,6 +125,14 @@ class User extends Authenticatable implements HasMedia
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->reg_number = User::where('department_id',$model->department_id)->max('reg_number') + 1;
+        });
     }
 
     protected function serializeDate(DateTimeInterface $date): string

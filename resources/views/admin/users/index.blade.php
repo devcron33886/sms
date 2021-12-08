@@ -23,7 +23,7 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.id') }}
+                            Reg Number
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.name') }}
@@ -31,24 +31,15 @@
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.user.fields.approved') }}
-                        </th>
+
                         <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.mobile') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.user.fields.profile_picture') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.department') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.class') }}
-                        </th>
+
+
                         <th>
                             &nbsp;
                         </th>
@@ -61,7 +52,7 @@
 
                             </td>
                             <td>
-                                {{ $user->id ?? '' }}
+                                {{ $user->department->short_name ?? '' }}-{{ str_pad($user->reg_number, 6, '0', STR_PAD_LEFT) }}
                             </td>
                             <td>
                                 {{ $user->name ?? '' }}
@@ -69,10 +60,7 @@
                             <td>
                                 {{ $user->email ?? '' }}
                             </td>
-                            <td>
-                                <span style="display:none">{{ $user->approved ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $user->approved ? 'checked' : '' }}>
-                            </td>
+
                             <td>
                                 @foreach($user->roles as $key => $item)
                                     <span class="badge badge-info">{{ $item->title }}</span>
@@ -81,20 +69,8 @@
                             <td>
                                 {{ $user->mobile ?? '' }}
                             </td>
-                            <td>
-                                @if($user->profile_picture)
-                                    <a href="{{ $user->profile_picture->getUrl() }}" target="_blank"
-                                       style="display: inline-block">
-                                        <img src="{{ $user->profile_picture->getUrl('thumb') }}">
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                {{ $user->department->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->class ?? '' }}
-                            </td>
+
+
                             <td>
                                 @can('user_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">

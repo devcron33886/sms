@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group">
                     <label for="mobile">{{ trans('cruds.user.fields.mobile') }}</label>
-                    <input class="form-control {{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="text"
+                    <input class="form-control {{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="tel"
                            name="mobile" id="mobile" value="{{ old('mobile', '') }}">
                     @if($errors->has('mobile'))
                         <span class="text-danger">{{ $errors->first('mobile') }}</span>
