@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyOverviewRequest;
 use App\Http\Requests\StoreOverviewRequest;
 use App\Http\Requests\UpdateOverviewRequest;
 use App\Models\Question;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,20 +20,27 @@ class OverviewController extends Controller
          $total_unanswered = Question::with('created_by')
              ->groupBy('status')
              ->where('status','0')
-             ->count();
+
+         ->count();
         $unanswered = Question::with(['created_by','mentor'])
             ->where('status','0')
             ->count();
 
         $answered = Question::with(['created_by','mentor'])
             ->where('status','1')
-            ->get();
+            ->count();
         $rejects = Question::with(['created_by','mentor'])
             ->where('status','2')
+            ->count();
+
+
+        $questions = Question::with(['created_by','category','mentor'])
             ->get();
 
-        return view('admin.overviews.index',compact('unanswered','answered','rejects','total_unanswered'));
+
+        return view('admin.overviews.index',compact('unanswered','answered','rejects','total_unanswered','questions'));
     }
+
 
 
 }

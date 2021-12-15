@@ -10,8 +10,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.overviews.index') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -24,22 +24,22 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{ $total_unanswered }}</h3>
 
-                            <p>New Orders</p>
+                            <p>My answered Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -50,40 +50,66 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{ $rejects }}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Rejected Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>65</h3>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    My Asked Questions
+                </div>
 
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class=" table table-bordered table-striped table-hover">
+                            <thead>
+                            <th>#</th>
+                            <th>Mentor</th>
+                            <th>Category</th>
+                            <th>Question Title</th>
+                            <th>Status</th>
+                            </thead>
+                            <tbody>
+                            @forelse( $questions as $question)
+                                <tr>
+                                    <td>{{ $question->id }}</td>
+                                    <td>{{ $question->mentor->name }}</td>
+                                    <td>{{ $question->category->name }}</td>
+                                    <td>{{ $question->title }}</td>
+                                    <td>@if($question->status == 0)
+                                            <button class="btn btn-info">Pending</button>
+                                        @elseif($question->status == 1)
+                                            <button class="btn btn-success">Answered</button>
+                                        @elseif($question->status == 2)
+                                            <button class="btn btn-danger">Rejected</button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5"> There no questions you have asked.</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <!-- ./col -->
             </div>
         </div><!-- /.container-fluid -->
     </section>

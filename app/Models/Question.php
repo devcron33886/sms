@@ -57,6 +57,10 @@ class Question extends Model
         return $this->belongsTo(User::class, 'created_by_id');
     }
 
+    public function answer(){
+        return $this->hasOne(Answer::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date): string
     {
         return $date->format('Y-m-d H:i:s');

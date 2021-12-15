@@ -2,23 +2,21 @@
 
 namespace App\Models;
 
-use DateTimeInterface;
+use \DateTimeInterface;
+use App\Notifications\VerifyUserNotification;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Image\Exceptions\InvalidManipulation;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-/**
- * @method static insert(array[] $users)
- */
 class User extends Authenticatable implements HasMedia
 {
     use SoftDeletes;
@@ -54,24 +52,10 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
         'department_id',
         'class',
-        'reg_number',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-    /**
-     * @var mixed
-     */
-    private $profile_picture;
-    /**
-     * @var mixed
-     */
-    private $email;
-
-    /**
-     * @var mixed
-     */
-
 
     public function __construct(array $attributes = [])
     {
@@ -84,13 +68,27 @@ class User extends Authenticatable implements HasMedia
         });
     }
 
-    /**
-     * @throws InvalidManipulation
-     */
+    public function getIsAdminAttribute()
+    {
+        return $this->roles()->where('id', 1)->exists();
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+    public function getEmailVerifiedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' '
+            . config('panel.time_format')) : null;
+    }
+
+    public function setEmailVerifiedAtAttribute($value)
+    {
+        $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' '
+            . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
     public function setPasswordAttribute($input)
@@ -105,7 +103,7 @@ class User extends Authenticatable implements HasMedia
         $this->notify(new ResetPassword($token));
     }
 
-    public function roles(): BelongsToMany
+    public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
@@ -114,24 +112,28 @@ class User extends Authenticatable implements HasMedia
     {
         $file = $this->getMedia('profile_picture')->last();
         if ($file) {
-            $file->url       = $file->getUrl();
+            $file->url = $file->getUrl();
             $file->thumbnail = $file->getUrl('thumb');
-            $file->preview   = $file->getUrl('preview');
+            $file->preview = $file->getUrl('preview');
         }
 
         return $file;
     }
 
-    public function department(): BelongsTo
+    public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
     }
 
     public static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->reg_number = User::where('department_id',$model->department_id)->max('reg_number') + 1;
+            $model->reg_number = User::where('department_id', $model->department_id)->max('reg_number') + 1;
         });
     }
 

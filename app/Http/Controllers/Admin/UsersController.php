@@ -10,9 +10,9 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
-use App\Notifications\RegistrationNotification;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -45,7 +45,9 @@ class UsersController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
+
         $user->roles()->sync($request->input('roles', []));
+        Password::sendResetLink($request->only(['email']));
         if ($request->input('profile_picture', false)) {
             $user->addMedia(storage_path('tmp/uploads/' . basename($request->input('profile_picture'))))->toMediaCollection('profile_picture');
         }
@@ -53,7 +55,6 @@ class UsersController extends Controller
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $user->id]);
         }
-
 
         return redirect()->route('admin.users.index');
     }

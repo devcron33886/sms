@@ -14,6 +14,7 @@
     <link
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
         rel="stylesheet"/>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="{{ asset('css/adminltev3.css') }}" rel="stylesheet"/>
     <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">

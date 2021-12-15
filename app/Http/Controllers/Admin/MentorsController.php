@@ -16,7 +16,8 @@ class MentorsController extends Controller
         abort_if(Gate::denies('mentor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $mentors = User::whereHas('roles', function($q){
             return $q->where('title','Mentor');
-        });
+        })->get();
+
         return view('admin.mentors.index',compact('mentors'));
     }
 
