@@ -9,7 +9,7 @@
 
         <p>
           Stop right where you are you are in resistricted area.
-          Meanwhile, you may <a href="{{ route('admin.home') }}">return to dashboard</a> or try using the search form.
+          Meanwhile, you may use this link <a href="{{ route('admin.home') }}">return to dashboard</a> or try using the search form.
         </p>
 
       </div>
