@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('remember_token')->nullable();
             $table->string('class')->nullable();
             $table->integer('reg_number')->nullable();
-            $table->integer('access_level')->default('5')->nullable();
+            $table->integer('access_level')->default('4');
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id', 'department_fk_5300648')->references('id')->on('departments');
             $table->timestamps();
