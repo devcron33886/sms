@@ -57,7 +57,8 @@ class Question extends Model
         return $this->belongsTo(User::class, 'created_by_id');
     }
 
-    public function answer(){
+    public function answer(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
         return $this->hasOne(Answer::class);
     }
 

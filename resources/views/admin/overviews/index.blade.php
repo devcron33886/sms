@@ -28,14 +28,15 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $total_unanswered }}</h3>
+                            <h3>{{ $unanswered }}</h3>
 
-                            <p>My answered Questions</p>
+                            <p>Unswered Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -43,14 +44,15 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $total_unanswered }}</h3>
+                            <h3>{{ $answered }}</h3>
 
-                            <p>My Unanswered Questions</p>
+                            <p>Answered Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -65,7 +67,8 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -93,17 +96,21 @@
                                     <td>{{ $question->category->name }}</td>
                                     <td>{{ $question->title }}</td>
                                     <td>@if($question->status == 0)
-                                            <button class="btn btn-info">Pending</button>
+                                            <a href="{{ route('admin.questions.show', $question->id) }}"
+                                               class="btn btn-info"><i class="fas fa-eye"></i> Pending</a>
                                         @elseif($question->status == 1)
-                                            <button class="btn btn-success">Answered</button>
+                                            <a href="{{ route('admin.questions.show', $question->id) }}"
+                                               class="btn btn-success"><i class="fas fa-eye"></i> Answered</a>
                                         @elseif($question->status == 2)
-                                            <button class="btn btn-danger">Rejected</button>
+                                            <a href="{{ route('admin.questions.show',$question->id) }}"
+                                               class="btn btn-danger"><i class="fas fa-eye"></i> Rejected</a>
                                         @endif
                                     </td>
+
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5"> There no questions you have asked.</td>
+                                    <td colspan="6"> There no questions you have asked.</td>
                                 </tr>
                             @endforelse
                             </tbody>

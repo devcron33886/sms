@@ -1,78 +1,44 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.question.title') }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+            Question Details
+        </div>
 
-    <div class="card-body">
-        <div class="form-group">
+        <div class="card-body">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.questions.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.question.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $question->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Mentor
-                        </th>
-                        <td>
-                            {{ $question->mentor->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.question.fields.category') }}
-                        </th>
-                        <td>
-                            {{ $question->category->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.question.fields.title') }}
-                        </th>
-                        <td>
-                            {{ $question->title }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.question.fields.description') }}
-                        </th>
-                        <td>
-                            {{ $question->description }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.question.fields.status') }}
-                        </th>
-                        <td>
-                            {{ App\Models\Question::STATUS_SELECT[$question->status] ?? '' }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.questions.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
+
+
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                        <b>Asked Mentor</b> <a class="float-right">{{ $question->mentor->name }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Category of Question</b> <a class="float-right">{{ $question->category->name }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Question Title</b> <a class="float-right">{{ $question->title }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Question Description</b> <a class="float-right">{{ $question->description }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Answer</b> <a class="float-right">{{ $question->answer->answer ?? 'No answer' }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Status</b> @if($question->status == 0)
+                            <button class="btn btn-info float-right">Pending</button>
+                        @elseif($question->status == 1)
+                            <button class="btn btn-success float-right">Answered</button>
+                        @elseif($question->status == 2)
+                            <button class="btn btn-danger float-right">Rejected</button>
+                        @endif
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
 
 
 

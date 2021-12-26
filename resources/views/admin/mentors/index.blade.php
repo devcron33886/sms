@@ -27,16 +27,14 @@
                         </th>
 
 
-                        <th>
-                            &nbsp;
-                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($mentors as $key => $mentor)
                         <tr data-entry-id="{{ $mentor->id }}">
-                            <td>
-
+                            <td style="width: 20%;">
+                                {{ $mentor->department->short_name ?? '' }}
+                                -{{ str_pad($mentor->reg_number, 6, '0', STR_PAD_LEFT) }}
                             </td>
                             <td>
                                 {{ $mentor->name ?? '' }}

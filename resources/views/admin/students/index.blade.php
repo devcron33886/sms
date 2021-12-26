@@ -22,7 +22,7 @@
                         <td>{{ $student->id }}</td>
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
-                        <td>{{-- $student->department->name --}}</td>
+                        <td>{{ $student->department->name }}</td>
                     </tr>
                     
                 @endforeach

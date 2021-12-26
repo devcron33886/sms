@@ -4,14 +4,14 @@
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route('admin.testimonials.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.testimonial.title_singular') }}
+                    Give your testimonial
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.testimonial.title_singular') }} {{ trans('global.list') }}
+            Available testimonial
         </div>
 
         <div class="card-body">

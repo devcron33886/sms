@@ -146,6 +146,8 @@ class HomeController
             ->where('status',2)
             ->count();
 
+           
+
         return view('home',compact(
             'settings1',
             'settings2',

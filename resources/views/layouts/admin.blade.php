@@ -43,22 +43,17 @@
         </ul>
 
         <!-- Right navbar links -->
-        @if(count(config('panel.available_languages', [])) > 1)
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        {{ strtoupper(app()->getLocale()) }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        @foreach(config('panel.available_languages') as $langLocale => $langName)
-                            <a class="dropdown-item"
-                               href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }}
-                                ({{ $langName }})</a>
-                        @endforeach
-                    </div>
-                </li>
-            </ul>
-        @endif
+        <ul class="navbar-nav ml-auto">
+            <li class="navbar-nav">
+                <a href="#" class="nav-link">Reg Number: &nbsp; <b>{{ Auth::user()->department->short_name ?? '' }}
+                -{{ str_pad(Auth::user()->reg_number, 6, '0', STR_PAD_LEFT) }}</b></a>
+            </li>
+
+            <li class="navbar-nav">
+                <a href="#" class="nav-link">{{ Auth::user()->name }}</a>
+            </li>
+        </ul>
+
 
     </nav>
 
@@ -89,7 +84,7 @@
 
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.0-alpha
+            {{ config('app.name')}}
         </div>
         <strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
     </footer>

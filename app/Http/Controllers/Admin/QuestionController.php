@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
 use App\Models\User;
+use App\Notifications\QuestionNotification;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +41,7 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request)
     {
         $question = Question::create($request->all());
+        
 
         return redirect()->route('admin.questions.index');
     }

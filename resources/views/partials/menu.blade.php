@@ -11,7 +11,9 @@
             </div>
         @endif
         <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            @foreach(Auth::user()->roles as $key => $item)
+                <a href="{{ route('profile.password.edit')}}" class="d-block" style="text-transform: uppercase">{{ $item->title }}</a>
+            @endforeach
         </div>
     </div>
 
@@ -29,6 +31,19 @@
                             </i>
                             <p>
                                 {{ trans('global.dashboard') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('overview_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.overviews.index") }}"
+                           class="nav-link {{ request()->is("admin/overviews") || request()->is("admin/overviews/*") ? "active" : "" }}">
+                            <i class="fa-fw nav-icon far fa-eye">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.overview.title') }}
                             </p>
                         </a>
                     </li>
@@ -178,19 +193,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('overview_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.overviews.index") }}"
-                           class="nav-link {{ request()->is("admin/overviews") || request()->is("admin/overviews/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon far fa-eye">
 
-                            </i>
-                            <p>
-                                {{ trans('cruds.overview.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')
                         <li class="nav-item">

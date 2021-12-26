@@ -2,8 +2,8 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">
-            {{ trans('global.create') }} {{ trans('cruds.testimonial.title_singular') }}
+        <div class="card-header text-lg-center">
+            Write Your Testimonial
         </div>
 
         <div class="card-body">

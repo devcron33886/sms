@@ -17,13 +17,9 @@ class OverviewController extends Controller
     public function index()
     {
         abort_if(Gate::denies('overview_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-         $total_unanswered = Question::with('created_by')
-             ->groupBy('status')
-             ->where('status','0')
 
-         ->count();
         $unanswered = Question::with(['created_by','mentor'])
-            ->where('status','0')
+            ->where('status',null)
             ->count();
 
         $answered = Question::with(['created_by','mentor'])
@@ -38,7 +34,7 @@ class OverviewController extends Controller
             ->get();
 
 
-        return view('admin.overviews.index',compact('unanswered','answered','rejects','total_unanswered','questions'));
+        return view('admin.overviews.index',compact('unanswered','answered','rejects','questions'));
     }
 
 
