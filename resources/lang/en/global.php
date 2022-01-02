@@ -130,7 +130,7 @@ return [
     'calendar_sources'                     => 'Calendar sources',
     'campaign'                             => 'Campaign',
     'campaigns'                            => 'Campaigns',
-    'categories'                           => 'Categories',
+    'students'                           => 'Categories',
     'category'                             => 'Category',
     'category_name'                        => 'Category name',
     'change_notifications_field_1_label'   => 'Send email notification to User',

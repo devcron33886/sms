@@ -31,11 +31,26 @@ class LoginController extends Controller
 
     protected  function authenticated(Request $request, $user)
     {
+        if ($user->access_level == 1)
+        {
+            return redirect()->route('admin.home');
+        }
+        if ($user->access_level == 2){
+            return redirect()->route('dean.home');
+        }
+        if ($user->access_level == 3)
+        {
+            return redirect()->route('mentor.dashboard.index');
+        }
         if ($user->access_level == 4)
         {
-            return redirect()->route('admin.overviews.index');
+            return redirect()->route('student.overviews.index');
         }
-       
+        if ($user->access_level == 5)
+        {
+            return redirect()->route('hod.home');
+        }
+
     }
 
     /**

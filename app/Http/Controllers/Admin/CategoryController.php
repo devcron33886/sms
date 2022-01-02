@@ -33,7 +33,7 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->all());
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.students.index');
     }
 
     public function edit(Category $category)
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.students.index');
     }
 
     public function show(Category $category)

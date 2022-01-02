@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.student')
 @section('content')
     @can('testimonial_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.testimonials.create') }}">
+                <a class="btn btn-success" href="{{ route('student.testimonials.create') }}">
                     Give your testimonial
                 </a>
             </div>
@@ -60,20 +60,14 @@
                             <td>
                                 @can('testimonial_show')
                                     <a class="btn btn-xs btn-primary"
-                                       href="{{ route('admin.testimonials.show', $testimonial->id) }}">
+                                       href="{{ route('student.testimonials.show', $testimonial->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('testimonial_edit')
-                                    <a class="btn btn-xs btn-info"
-                                       href="{{ route('admin.testimonials.edit', $testimonial->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
 
                                 @can('testimonial_delete')
-                                    <form action="{{ route('admin.testimonials.destroy', $testimonial->id) }}"
+                                    <form action="{{ route('student.testimonials.destroy', $testimonial->id) }}"
                                           method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                           style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">

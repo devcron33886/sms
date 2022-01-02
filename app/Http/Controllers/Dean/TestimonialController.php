@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dean;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyTestimonialRequest;
@@ -20,7 +20,7 @@ class TestimonialController extends Controller
 
         $testimonials = Testimonial::with(['created_by', 'user'])->get();
 
-        return view('admin.testimonials.index', compact('testimonials'));
+        return view('dean.testimonials.index', compact('testimonials'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class TestimonialController extends Controller
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.testimonials.create', compact('users'));
+        return view('dean.testimonials.create', compact('users'));
     }
 
     public function store(StoreTestimonialRequest $request)
@@ -40,7 +40,7 @@ class TestimonialController extends Controller
             'user_id' => \Auth::user()->id,
         ]);
 
-        return redirect()->route('admin.testimonials.index');
+        return redirect()->route('dean.testimonials.index');
     }
 
     public function edit(Testimonial $testimonial)
@@ -51,14 +51,14 @@ class TestimonialController extends Controller
 
         $testimonial->load('created_by', 'user');
 
-        return view('admin.testimonials.edit', compact('users', 'testimonial'));
+        return view('dean.testimonials.edit', compact('users', 'testimonial'));
     }
 
     public function update(UpdateTestimonialRequest $request, Testimonial $testimonial)
     {
         $testimonial->update($request->all());
 
-        return redirect()->route('admin.testimonials.index');
+        return redirect()->route('dean.testimonials.index');
     }
 
     public function show(Testimonial $testimonial)
@@ -67,7 +67,7 @@ class TestimonialController extends Controller
 
         $testimonial->load('created_by', 'user');
 
-        return view('admin.testimonials.show', compact('testimonial'));
+        return view('dean.testimonials.show', compact('testimonial'));
     }
 
     public function destroy(Testimonial $testimonial)

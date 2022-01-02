@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dean;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyCategoryRequest;
@@ -19,42 +19,42 @@ class CategoryController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.categories.index', compact('categories'));
+        return view('dean.categories.index', compact('categories'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.categories.create');
+        return view('dean.categories.create');
     }
 
     public function store(StoreCategoryRequest $request)
     {
         $category = Category::create($request->all());
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('dean.students.index');
     }
 
     public function edit(Category $category)
     {
         abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.categories.edit', compact('category'));
+        return view('dean.categories.edit', compact('category'));
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->all());
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('dean.students.index');
     }
 
     public function show(Category $category)
     {
         abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.categories.show', compact('category'));
+        return view('dean.categories.show', compact('category'));
     }
 
     public function destroy(Category $category)

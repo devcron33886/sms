@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dean;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
@@ -26,20 +26,25 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::with(['roles', 'department', 'media'])->get();
+        $users = User::whereHas('roles', function ($hod) {
+            return $hod->where('title', 'HOD');
+        })
+            ->with(['roles', 'department', 'media'])
+            ->get();
 
-        return view('admin.users.index', compact('users'));
+        return view('dean.users.index', compact('users'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::pluck('title', 'id');
+        $roles = Role::where('title','HOD')
+        ->pluck('title', 'id');
 
         $departments = Department::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.create', compact('roles', 'departments'));
+        return view('dean.users.create', compact('roles', 'departments'));
     }
 
     public function store(StoreUserRequest $request)
@@ -56,7 +61,7 @@ class UsersController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $user->id]);
         }
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('dean.users.index');
     }
 
     public function edit(User $user)
@@ -69,7 +74,7 @@ class UsersController extends Controller
 
         $user->load('roles', 'department');
 
-        return view('admin.users.edit', compact('roles', 'departments', 'user'));
+        return view('dean.users.edit', compact('roles', 'departments', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user): \Illuminate\Http\RedirectResponse
@@ -87,7 +92,7 @@ class UsersController extends Controller
             $user->profile_picture->delete();
         }
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('dean.users.index');
     }
 
     public function show(User $user)
@@ -96,7 +101,7 @@ class UsersController extends Controller
 
         $user->load('roles', 'department');
 
-        return view('admin.users.show', compact('user'));
+        return view('dean.users.show', compact('user'));
     }
 
     public function destroy(User $user)

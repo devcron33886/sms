@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <table class="table table-resposnsive table-stripped">
+        <table class="table table-bordered table-stripped">
             <thead>
                 <tr>
                     <td>#</td>
@@ -22,9 +22,11 @@
                         <td>{{ $student->id }}</td>
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
-                        <td>{{ $student->department->name }}</td>
+                        <td>@if($student->department)
+                                {{ $student->department->name }}
+                            @endif</td>
                     </tr>
-                    
+
                 @endforeach
             </tbody>
         </table>

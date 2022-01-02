@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.dean')
 @section('content')
 
     <div class="card">
         <div class="card-header">
-            {{ trans('global.edit') }} {{ trans('cruds.user.title_singular') }}
+            Edit HOD
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route("admin.users.update", [$user->id]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route("dean.users.update", [$user->id]) }}" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="form-group">
@@ -37,18 +37,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
                 </div>
-                <div class="form-group">
-                    <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
-                        <input type="hidden" name="approved" value="0">
-                        <input class="form-check-input" type="checkbox" name="approved" id="approved"
-                               value="1" {{ $user->approved || old('approved', 0) === 1 ? 'checked' : '' }}>
-                        <label class="form-check-label" for="approved">{{ trans('cruds.user.fields.approved') }}</label>
-                    </div>
-                    @if($errors->has('approved'))
-                        <span class="text-danger">{{ $errors->first('approved') }}</span>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
-                </div>
+
                 <div class="form-group">
                     <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
                     <div style="padding-bottom: 4px">
@@ -102,15 +91,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.user.fields.department_helper') }}</span>
                 </div>
-                <div class="form-group">
-                    <label for="class">{{ trans('cruds.user.fields.class') }}</label>
-                    <input class="form-control {{ $errors->has('class') ? 'is-invalid' : '' }}" type="text" name="class"
-                           id="class" value="{{ old('class', $user->class) }}">
-                    @if($errors->has('class'))
-                        <span class="text-danger">{{ $errors->first('class') }}</span>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.user.fields.class_helper') }}</span>
-                </div>
+
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}

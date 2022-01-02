@@ -1,15 +1,15 @@
-@extends('layouts.admin')
+@extends('layouts.dean')
 @section('content')
 
     <div class="card">
         <div class="card-header">
-            {{ trans('global.show') }} {{ trans('cruds.user.title') }}
+           HOD Details
         </div>
 
         <div class="card-body">
             <div class="form-group">
                 <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('admin.users.index') }}">
+                    <a class="btn btn-default" href="{{ route('dean.users.index') }}">
                         {{ trans('global.back_to_list') }}
                     </a>
                 </div>
@@ -39,14 +39,7 @@
                             {{ $user->email }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.approved') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $user->approved ? 'checked' : '' }}>
-                        </td>
-                    </tr>
+
                     <tr>
                         <th>
                             {{ trans('cruds.user.fields.roles') }}
@@ -87,17 +80,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.class') }}
-                        </th>
-                        <td>
-                            {{ $user->class }}
-                        </td>
+
                     </tr>
                     </tbody>
                 </table>
                 <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('admin.users.index') }}">
+                    <a class="btn btn-default" href="{{ route('dean.users.index') }}">
                         {{ trans('global.back_to_list') }}
                     </a>
                 </div>

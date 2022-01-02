@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyOverviewRequest;
-use App\Http\Requests\StoreOverviewRequest;
-use App\Http\Requests\UpdateOverviewRequest;
 use App\Models\Question;
 use App\Models\User;
 use Gate;
@@ -20,21 +17,22 @@ class OverviewController extends Controller
 
         $unanswered = Question::with(['created_by','mentor'])
             ->where('status',null)
-            ->count();
+            ->where('created_by',\Auth::user()->id);
 
         $answered = Question::with(['created_by','mentor'])
             ->where('status','1')
-            ->count();
+            ->where('created_by',\Auth::user()->id)
+           ;
         $rejects = Question::with(['created_by','mentor'])
-            ->where('status','2')
-            ->count();
+            ->where('status','2');
 
 
         $questions = Question::with(['created_by','category','mentor'])
+            ->where('created_by',\Auth::user()->id)
             ->get();
 
 
-        return view('admin.overviews.index',compact('unanswered','answered','rejects','questions'));
+        return view('student.overviews.index',compact('unanswered','answered','rejects','questions'));
     }
 
 

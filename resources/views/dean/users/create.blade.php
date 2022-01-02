@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.dean')
 @section('content')
 
     <div class="card">
         <div class="card-header">
-            {{ trans('global.create') }} {{ trans('cruds.user.title_singular') }}
+            ADD NEW HOD
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route("admin.users.store") }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route("dean.users.store") }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
@@ -36,18 +36,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
                 </div>
-                <div class="form-group">
-                    <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
-                        <input type="hidden" name="approved" value="0">
-                        <input class="form-check-input" type="checkbox" name="approved" id="approved"
-                               value="1" {{ old('approved', 0) == 1 ? 'checked' : '' }}>
-                        <label class="form-check-label" for="approved">{{ trans('cruds.user.fields.approved') }}</label>
-                    </div>
-                    @if($errors->has('approved'))
-                        <span class="text-danger">{{ $errors->first('approved') }}</span>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
-                </div>
+
                 <div class="form-group">
                     <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
                     <div style="padding-bottom: 4px">
@@ -102,15 +91,6 @@
                     <span class="help-block">{{ trans('cruds.user.fields.department_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="class">{{ trans('cruds.user.fields.class') }}</label>
-                    <input class="form-control {{ $errors->has('class') ? 'is-invalid' : '' }}" type="text" name="class"
-                           id="class" value="{{ old('class', '') }}">
-                    @if($errors->has('class'))
-                        <span class="text-danger">{{ $errors->first('class') }}</span>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.user.fields.class_helper') }}</span>
-                </div>
-                <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}
                     </button>
@@ -126,7 +106,7 @@
 @section('scripts')
     <script>
         Dropzone.options.profilePictureDropzone = {
-            url: '{{ route('admin.users.storeMedia') }}',
+            url: '{{ route('dean.users.storeMedia') }}',
             maxFilesize: 5, // MB
             acceptedFiles: '.jpeg,.jpg,.png,.gif',
             maxFiles: 1,

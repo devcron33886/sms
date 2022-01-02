@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dean')
 @section('content')
 
     <div class="card">
@@ -11,9 +11,7 @@
                 <table class=" table table-bordered table-striped table-hover datatable datatable-User">
                     <thead>
                     <tr>
-                        <th width="10">
 
-                        </th>
                         <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
@@ -32,10 +30,7 @@
                     <tbody>
                     @foreach($mentors as $key => $mentor)
                         <tr data-entry-id="{{ $mentor->id }}">
-                            <td style="width: 20%;">
-                                {{ $mentor->department->short_name ?? '' }}
-                                -{{ str_pad($mentor->reg_number, 6, '0', STR_PAD_LEFT) }}
-                            </td>
+
                             <td>
                                 {{ $mentor->name ?? '' }}
                             </td>

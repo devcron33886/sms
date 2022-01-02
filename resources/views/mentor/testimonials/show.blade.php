@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.mentor')
 @section('content')
 
     <div class="card">
@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="form-group">
                 <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('admin.testimonials.index') }}">
+                    <a class="btn btn-default" href="{{ route('mentor.testimonials.index') }}">
                         {{ trans('global.back_to_list') }}
                     </a>
                 </div>

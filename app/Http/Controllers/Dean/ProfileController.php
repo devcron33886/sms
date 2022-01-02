@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dean;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
@@ -25,7 +25,7 @@ class ProfileController extends Controller
 
         $profiles = Profile::with(['user', 'department', 'media'])->get();
 
-        return view('admin.profiles.index', compact('profiles'));
+        return view('dean.profiles.index', compact('profiles'));
     }
 
     public function create()

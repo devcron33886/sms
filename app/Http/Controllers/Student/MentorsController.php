@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 
@@ -18,7 +18,7 @@ class MentorsController extends Controller
             return $q->where('title','Mentor');
         })->get();
 
-        return view('admin.mentors.index',compact('mentors'));
+        return view('student.mentors.index',compact('mentors'));
     }
 
 

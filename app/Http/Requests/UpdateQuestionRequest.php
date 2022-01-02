@@ -32,6 +32,14 @@ class UpdateQuestionRequest extends FormRequest
             'description' => [
                 'required',
             ],
+
+            'created_by'
+            => [
+                \Auth::user()->id
+            ],
+            'answer' => [
+                'required',
+            ],
         ];
     }
 }

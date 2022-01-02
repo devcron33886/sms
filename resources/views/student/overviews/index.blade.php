@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.student')
 @section('content')
 
     <!-- Content Header (Page header) -->
@@ -10,7 +10,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.overviews.index') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('student.overviews.index') }}">Home</a></li>
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div><!-- /.col -->
@@ -28,14 +28,14 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $unanswered }}</h3>
+                            <h3>{{ $unanswered->count() }}</h3>
 
-                            <p>Unswered Questions</p>
+                            <p>Unanswered Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i
+                        <a href="{{ route('student.questions.index') }}" class="small-box-footer">More info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -44,14 +44,14 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $answered }}</h3>
+                            <h3>{{ $answered->count() }}</h3>
 
                             <p>Answered Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i
+                        <a href="{{ route('student.questions.index') }}" class="small-box-footer">More info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -60,14 +60,14 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ $rejects }}</h3>
+                            <h3>{{ $rejects->count() }}</h3>
 
                             <p>Rejected Questions</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="{{ route('admin.questions.index') }}" class="small-box-footer">More info <i
+                        <a href="{{ route('student.questions.index') }}" class="small-box-footer">More info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -96,13 +96,13 @@
                                     <td>{{ $question->category->name }}</td>
                                     <td>{{ $question->title }}</td>
                                     <td>@if($question->status == 0)
-                                            <a href="{{ route('admin.questions.show', $question->id) }}"
+                                            <a href="{{ route('student.questions.show', $question->id) }}"
                                                class="btn btn-info"><i class="fas fa-eye"></i> Pending</a>
                                         @elseif($question->status == 1)
-                                            <a href="{{ route('admin.questions.show', $question->id) }}"
+                                            <a href="{{ route('student.questions.show', $question->id) }}"
                                                class="btn btn-success"><i class="fas fa-eye"></i> Answered</a>
                                         @elseif($question->status == 2)
-                                            <a href="{{ route('admin.questions.show',$question->id) }}"
+                                            <a href="{{ route('student.questions.show',$question->id) }}"
                                                class="btn btn-danger"><i class="fas fa-eye"></i> Rejected</a>
                                         @endif
                                     </td>

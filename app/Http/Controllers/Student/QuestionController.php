@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyQuestionRequest;
@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
 use App\Models\User;
-use App\Notifications\QuestionNotification;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +19,11 @@ class QuestionController extends Controller
     {
         abort_if(Gate::denies('question_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $questions = Question::with(['mentor', 'category', 'created_by'])->get();
+        $questions = Question::with(['mentor', 'category', 'created_by'])
+            ->where('created_by',\Auth::user()->id)
+            ->get();
 
-        return view('admin.questions.index', compact('questions'));
+        return view('student.questions.index', compact('questions'));
     }
 
     public function create()
@@ -35,15 +36,21 @@ class QuestionController extends Controller
 
         $categories = Category::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.questions.create', compact('mentors', 'categories'));
+        return view('student.questions.create', compact('mentors', 'categories'));
     }
 
     public function store(StoreQuestionRequest $request)
     {
-        $question = Question::create($request->all());
-        
+        $question = Question::create([
+            'category_id' => $request->category_id,
+            'mentor_id' => $request->mentor_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'created_by' => \Auth::user()->id,
+        ]);
 
-        return redirect()->route('admin.questions.index');
+
+        return redirect()->route('student.questions.index');
     }
 
     public function edit(Question $question)
@@ -56,14 +63,14 @@ class QuestionController extends Controller
 
         $question->load('mentor', 'category', 'created_by');
 
-        return view('admin.questions.edit', compact('mentors', 'categories', 'question'));
+        return view('student.questions.edit', compact('mentors', 'categories', 'question'));
     }
 
     public function update(UpdateQuestionRequest $request, Question $question)
     {
         $question->update($request->all());
 
-        return redirect()->route('admin.questions.index');
+        return redirect()->route('student.questions.index');
     }
 
     public function show(Question $question)
@@ -72,7 +79,7 @@ class QuestionController extends Controller
 
         $question->load('mentor', 'category', 'created_by');
 
-        return view('admin.questions.show', compact('question'));
+        return view('student.questions.show', compact('question'));
     }
 
     public function destroy(Question $question)

@@ -21,9 +21,10 @@ class CreateQuestionsTable extends Migration
             $table->foreign('category_id', 'category_fk_5274350')->references('id')->on('categories');
             $table->string('title');
             $table->longText('description');
+            $table->longText('answer')->nullable();
             $table->string('status')->nullable();
-            $table->unsignedBigInteger('created_by_id')->nullable();
-            $table->foreign('created_by_id', 'created_by_fk_5274356')->references('id')->on('users');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by', 'created_by_fk_5274356')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });

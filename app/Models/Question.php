@@ -3,16 +3,14 @@
 namespace App\Models;
 
 use \DateTimeInterface;
-use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Notification;
+
 
 class Question extends Model
 {
     use SoftDeletes;
-    use MultiTenantModelTrait;
     use HasFactory;
 
     public const STATUS_SELECT = [
@@ -33,8 +31,9 @@ class Question extends Model
         'mentor_id',
         'category_id',
         'title',
-        'created_by_id',
+        'created_by',
         'description',
+        'answer',
         'status',
         'created_at',
         'updated_at',
@@ -54,13 +53,9 @@ class Question extends Model
 
     public function created_by(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function answer(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(Answer::class);
-    }
 
     protected function serializeDate(DateTimeInterface $date): string
     {

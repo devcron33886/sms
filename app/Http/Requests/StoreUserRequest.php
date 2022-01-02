@@ -43,6 +43,10 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'access_level' => [
+                'required',
+                'integer',
+            ],
             'class' => [
                 'string',
                 'nullable',

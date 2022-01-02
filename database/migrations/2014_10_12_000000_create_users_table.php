@@ -20,12 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable()->unique();
             $table->datetime('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->boolean('approved')->default(0)->nullable();
             $table->string('mobile')->nullable();
             $table->string('remember_token')->nullable();
             $table->string('class')->nullable();
             $table->integer('reg_number')->nullable();
-            $table->integer('access_level')->default('4');
+            $table->integer('access_level')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id', 'department_fk_5300648')->references('id')->on('departments');
             $table->timestamps();

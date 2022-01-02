@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dean;
 
 use App\Models\Question;
 use Exception;
@@ -146,9 +146,9 @@ class HomeController
             ->where('status',2)
             ->count();
 
-           
 
-        return view('home',compact(
+
+        return view('dean.home',compact(
             'settings1',
             'settings2',
             'settings3',

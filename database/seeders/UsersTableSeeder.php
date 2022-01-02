@@ -16,8 +16,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'admin@sms.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'approved'       => 1,
                 'access_level'   => 1,
+                'created_at' => now(),
             ],
             [
                 'id'             => 2,
@@ -25,8 +25,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'dean@sms.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'approved'       => 1,
-                'access_level'   => 3,
+                'access_level'   => 2,
+                'created_by' => now(),
             ],
             [
                 'id'             => 3,
@@ -34,8 +34,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'mentor@sms.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'approved'       => 1,
                 'access_level'   => 3,
+                'created_at'    => now(),
             ],
             [
                 'id'             => 4,
@@ -43,8 +43,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'student@sms.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'approved'       => 1,
                 'access_level'   => 4,
+                'created_at'    => now(),
             ],
             [
                 'id'             => 5,
@@ -52,8 +52,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'hod@sms.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'approved'       => 1,
                 'access_level'   => 5,
+                'created_at' =>now(),
             ],
         ];
 

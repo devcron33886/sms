@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.mentor')
 @section('content')
 
     <div class="card">
@@ -24,7 +24,7 @@
                         <b>Question Description</b> <a class="float-right">{{ $question->description }}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Answer</b> <a class="float-right">{{ $question->answer->answer ?? 'No answer' }}</a>
+                        <b>Answer</b> <a class="float-right">{{ $question->answer }}</a>
                     </li>
                     <li class="list-group-item">
                         <b>Status</b> @if($question->status == 0)

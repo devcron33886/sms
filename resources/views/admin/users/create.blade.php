@@ -36,18 +36,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
                 </div>
-                <div class="form-group">
-                    <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
-                        <input type="hidden" name="approved" value="0">
-                        <input class="form-check-input" type="checkbox" name="approved" id="approved"
-                               value="1" {{ old('approved', 0) == 1 ? 'checked' : '' }}>
-                        <label class="form-check-label" for="approved">{{ trans('cruds.user.fields.approved') }}</label>
-                    </div>
-                    @if($errors->has('approved'))
-                        <span class="text-danger">{{ $errors->first('approved') }}</span>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
-                </div>
+
                 <div class="form-group">
                     <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
                     <div style="padding-bottom: 4px">
@@ -86,6 +75,15 @@
                         <span class="text-danger">{{ $errors->first('profile_picture') }}</span>
                     @endif
                     <span class="help-block">{{ trans('cruds.user.fields.profile_picture_helper') }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Access level</label>
+                    <input class="form-control {{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="number"
+                           name="access_level" id="access_level" value="{{ old('access_level', '') }}">
+                    @if($errors->has('access_level'))
+                        <span class="text-danger">{{ $errors->first('access_level') }}</span>
+                    @endif
+                    <span class="help-block"></span>
                 </div>
                 <div class="form-group">
                     <label class="required" for="department_id">{{ trans('cruds.user.fields.department') }}</label>
